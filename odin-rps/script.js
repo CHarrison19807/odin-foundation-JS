@@ -18,8 +18,8 @@ function game() {
     let computerSelection, playerSelection;
     function playRound(playerSelection, computerSelection) {
         
-        console.log(playerSelection);
-        console.log(computerSelection);
+        //console.log(playerSelection);
+        //console.log(computerSelection);
 
         if (playerSelection == "rock") {
             if (computerSelection == "paper") {
@@ -72,8 +72,8 @@ function game() {
         i++
     }
 
-    console.log(playerWinCount);
-    console.log(computerWinCount);
+    //console.log(playerWinCount);
+    //console.log(computerWinCount);
 
     if (playerWinCount > computerWinCount) {
         console.log("You win the game!");
