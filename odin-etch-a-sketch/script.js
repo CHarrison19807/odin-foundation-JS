@@ -14,6 +14,18 @@ const gridContainer = document.createElement("div");
 const colorButtons = document.createElement("div");
 colorButtons.classList.add("color-buttons");
 
+const resetButton = document.createElement("button");
+resetButton.textContent = "Reset Sketch";
+resetButton.classList.add("reset-button");
+
+
+
+const sizeButton = document.createElement("button");
+sizeButton.textContent = "Click to Adjust Size";
+sizeButton.addEventListener("click", () => {
+    assignSize();
+});
+
 const randomColorButton = document.createElement("button");
 randomColorButton.textContent = "Random Color";
 randomColorButton.addEventListener("click", () => {
@@ -29,14 +41,14 @@ blackColorButton.addEventListener("click", () => {
     resetGrid();
 });
 
-const resetButton = document.createElement("button");
-resetButton.textContent = "Reset Sketch";
 resetButton.addEventListener("click", resetGrid);
-resetButton.classList.add("reset-button");
 
+
+
+colorButtons.appendChild(resetButton);
 colorButtons.appendChild(blackColorButton);
 colorButtons.appendChild(randomColorButton);
-colorButtons.appendChild(resetButton);
+container.appendChild(sizeButton);
 container.appendChild(colorButtons);
 
 
@@ -84,6 +96,15 @@ function resetGrid() {
 
 function clearGrid() {
     gridContainer.innerHTML = "";
+}
+
+function assignSize() {
+    currentSize = prompt("Enter number of squares per row (Maximum 100)");
+    if (currentSize > 100 || currentSize < 0) {
+        alert("Improper Input");
+        assignSize();
+    }
+    resetGrid();
 }
 
 function assignColor(colorAssignment) {
