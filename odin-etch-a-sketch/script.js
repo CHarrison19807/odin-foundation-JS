@@ -11,6 +11,16 @@ container.setAttribute('class', 'container');
 
 const gridContainer = document.createElement('div');
 
+const colorButtons = document.createElement('div');
+colorButtons.setAttribute('class', 'color-buttons');
+
+const randomColorButton = document.createElement('button');
+randomColorButton.textContent = 'Random Color';
+randomColorButton.setAttribute('class', 'random-button');
+
+const resetButton = document.createElement('button');
+resetButton.textContent = 'Reset Sketch';
+resetButton.setAttribute('class', 'reset-button');
 
 
 
@@ -22,7 +32,7 @@ function createGrid(squarePerRow) {
             const gridElement = document.createElement('div');
             gridElement.setAttribute('class', 'gridElement');
 
-            gridElement.addEventListener('click', () => {
+            gridElement.addEventListener('mouseover', () => {
                 if (currentColor == 'random') {
                     gridElement.style.backgroundColor = randomColor();
                 }
@@ -40,4 +50,24 @@ function createGrid(squarePerRow) {
     container.appendChild(gridContainer);
 }
 
+function randomColor() {
+    color = Math.floor(Math.random() * 256);
+}
+
+function resetGrid() {
+    clearGrid();
+    createGrid(size);
+}
+
+function clearGrid() {
+    gridContainer.innerHTML = '';
+}
+
+function assignColor(colorAssignment) {
+    currentColor = colorAssignment;
+}
+
 createGrid(DEFAULT_SIZE);
+colorButtons.appendChild(randomColorButton);
+colorButtons.appendChild(resetButton);
+container.appendChild(colorButtons);
