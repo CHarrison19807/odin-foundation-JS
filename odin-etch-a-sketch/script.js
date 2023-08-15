@@ -1,39 +1,56 @@
 const DEFAULT_SIZE = 16;
-const DEFAULT_COLOR = 'black';
+const DEFAULT_COLOR = "black";
 
 let currentColor = DEFAULT_COLOR;
-let size = DEFAULT_SIZE;
+let currentSize = DEFAULT_SIZE;
 
 
 
-const container = document.querySelector('#container');
-container.setAttribute('class', 'container');
+const container = document.querySelector("#container");
+container.classList.add("container");
 
-const gridContainer = document.createElement('div');
+const gridContainer = document.createElement("div");
 
-const colorButtons = document.createElement('div');
-colorButtons.setAttribute('class', 'color-buttons');
+const colorButtons = document.createElement("div");
+colorButtons.classList.add("color-buttons");
 
-const randomColorButton = document.createElement('button');
-randomColorButton.textContent = 'Random Color';
-randomColorButton.setAttribute('class', 'random-button');
+const randomColorButton = document.createElement("button");
+randomColorButton.textContent = "Random Color";
+randomColorButton.addEventListener("click", () => {
+    assignColor('random');
+    resetGrid();
+});
+randomColorButton.classList.add("random-button");
 
-const resetButton = document.createElement('button');
-resetButton.textContent = 'Reset Sketch';
-resetButton.setAttribute('class', 'reset-button');
+const blackColorButton = document.createElement("button");
+blackColorButton.textContent = "Black";
+blackColorButton.addEventListener("click", () => {
+    assignColor('black');
+    resetGrid();
+});
+
+const resetButton = document.createElement("button");
+resetButton.textContent = "Reset Sketch";
+resetButton.addEventListener("click", resetGrid);
+resetButton.classList.add("reset-button");
+
+colorButtons.appendChild(blackColorButton);
+colorButtons.appendChild(randomColorButton);
+colorButtons.appendChild(resetButton);
+container.appendChild(colorButtons);
 
 
 
 function createGrid(squarePerRow) {
     for (let i = 0; i < squarePerRow; i++) {
-        const gridCol = document.createElement('div');
+        const gridCol = document.createElement("div");
 
         for (let j = 0; j < squarePerRow; j++) {
-            const gridElement = document.createElement('div');
-            gridElement.setAttribute('class', 'gridElement');
+            const gridElement = document.createElement("div");
+            gridElement.classList.add("gridElement");
 
-            gridElement.addEventListener('mouseover', () => {
-                if (currentColor == 'random') {
+            gridElement.addEventListener("mouseover", () => {
+                if (currentColor == "random") {
                     gridElement.style.backgroundColor = randomColor();
                 }
 
@@ -43,24 +60,30 @@ function createGrid(squarePerRow) {
             });
             gridCol.appendChild(gridElement);
         }
-        gridCol.setAttribute('class', 'gridCol');
+        gridCol.setAttribute("class", "gridCol");
         gridContainer.appendChild(gridCol);
     }
-    gridContainer.setAttribute('class', 'gridContainer');
-    container.appendChild(gridContainer);
+    gridContainer.setAttribute("class", "gridContainer");
+    container.insertBefore(gridContainer, colorButtons);
+}
+
+function randomNumber() {
+    let randNumber = Math.floor(Math.random() * 256);
+    return randNumber;
 }
 
 function randomColor() {
-    color = Math.floor(Math.random() * 256);
+    let randColor = "rgb(" + randomNumber() + "," + randomNumber() + "," + randomNumber() + ")";
+    return randColor;
 }
 
 function resetGrid() {
     clearGrid();
-    createGrid(size);
+    createGrid(currentSize);
 }
 
 function clearGrid() {
-    gridContainer.innerHTML = '';
+    gridContainer.innerHTML = "";
 }
 
 function assignColor(colorAssignment) {
@@ -68,6 +91,4 @@ function assignColor(colorAssignment) {
 }
 
 createGrid(DEFAULT_SIZE);
-colorButtons.appendChild(randomColorButton);
-colorButtons.appendChild(resetButton);
-container.appendChild(colorButtons);
+
