@@ -13,7 +13,7 @@ body {
 
 #calculator-body {
     width: 400px;
-    height: 800px;
+    height: 700px;
     border-radius: 5%;
     display: flex;
     flex-flow: column;
@@ -25,8 +25,15 @@ body {
 #calculator-display {
     flex-grow: 2;
     background-color: #444;
-    text-align: right;
-    margin: 5px 15px 35px;
+    margin: 0px 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 340px;
+    height: 14px;
+    font-size: 54px;
+    color: white;
+    padding: 0px 15px;
 }
 
 #calculator-buttons {
@@ -61,7 +68,7 @@ body {
     background-color: #e69c2d;
 }
 
-#zero-button {
+#button-zero {
     width: 192.5px;
 }
 
